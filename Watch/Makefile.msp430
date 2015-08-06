@@ -1,4 +1,4 @@
-IARPATH = "C:\Program Files\IAR Systems\Embedded Workbench 6.4 Evaluation\430"
+IARPATH = "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\430"
 WINE    =
 CC      = $(IARPATH)/bin/icc430.exe
 LINK    = $(IARPATH)/bin/xlink.exe
@@ -10,8 +10,8 @@ FWVERSION ="1.0.0.$$(cat $(BUILDNUM))"
 
 IGNORE_WARNINGS=Pa050
 
-CFLAGS  = --debug -D__MSP430F5438A__ -e --double=32 --dlib_config $(IARPATH)/LIB/DLIB/dl430xlfn.h  --core=430X --reduce_stack_usage --data_model=large -Ohs --multiplier=32 --multiplier_location=4C0 --hw_workaround=CPU40 --relaxed_fp --silent --diag_suppress $(IGNORE_WARNINGS) --no_wrap_diagnostics -DFWVERSION=\"$(FWVERSION)\"
-LDFLAGS = -z -xmsnio -I$(IARPATH)/LIB -f ./build/iwatch-lnk430F5438A.xcl -f $(IARPATH)/config/multiplier32_loc2.xcl -D_STACK_SIZE=900 -r $(IARPATH)/LIB/DLIB/dl430xlfn.r43 -D_DATA16_HEAP_SIZE=F10 -s __program_start -D_DATA20_HEAP_SIZE=E10
+CFLAGS  = --debug -D__MSP430F5438A__ -e --double=32  --dlib_config ${IARPATH}/lib/dlib/dl430xllfn.h  --core=430X --reduce_stack_usage --data_model=large -On --multiplier=32 --hw_workaround=CPU40 --relaxed_fp --silent --diag_suppress $(IGNORE_WARNINGS) --no_wrap_diagnostics -DFWVERSION=\"$(FWVERSION)\"
+LDFLAGS = -z -xmsni -I$(IARPATH)/LIB -f ./build/iwatch-lnk430F5438A.xcl -f $(IARPATH)/config/linker/multiplier32.xcl -D_STACK_SIZE=900 -r $(IARPATH)/LIB/DLIB/dl430xllfn.r43 -D_DATA16_HEAP_SIZE=F10 -s __program_start -D_DATA20_HEAP_SIZE=E10 -D__iar_HWMUL=4C0
 
 LIBS = pedometer/sleepalgo.r43 pedometer/ti_pedometer.r43
 

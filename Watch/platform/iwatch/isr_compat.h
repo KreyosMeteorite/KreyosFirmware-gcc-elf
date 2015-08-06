@@ -67,8 +67,8 @@
 #elif defined(__IAR_SYSTEMS_ICC__)  &&  (((__TID__ >> 8) & 0x7f) == 43)  &&  (__VER__ < 200)
     /* This is V1.xx of the IAR compiler. */
 #define ISR(a,b) interrupt[a ## _VECTOR] void b(void)
-#elif defined(__IAR_SYSTEMS_ICC__)  &&  (((__TID__ >> 8) & 0x7f) == 43)  &&  (__VER__ < 600)
-    /* This is V2.xx, V3.xx, V4.xx, V5.xx of the IAR compiler. */
+#elif defined(__IAR_SYSTEMS_ICC__)  &&  (((__TID__ >> 8) & 0x7f) == 43)  &&  (__VER__ < 800)
+    /* This is V2.xx, V3.xx, V4.xx, V5.xx, V6.xx, V7.xx of the IAR compiler. */
 #define ISR(a,b) \
 __PRAGMA__(vector=a ##_VECTOR) \
 __interrupt void b(void)
