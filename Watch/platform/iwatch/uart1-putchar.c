@@ -43,7 +43,7 @@ uart_init(char rate)
   TA0CTL = TASSEL_2 + MC_2;                            // SMCLK, start in continuous mode
 }
 
-int putchar(int data)
+int serchar(int data)
 {
     int tempData;
 

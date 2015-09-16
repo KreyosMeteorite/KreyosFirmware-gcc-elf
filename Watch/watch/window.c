@@ -7,7 +7,7 @@
 #include <string.h>
 #include "backlight.h"
 #include "cfs/cfs.h"
-#include "btstack/src/hfp.h"
+////#include "btstack/src/hfp.h"
 #include "system.h"
 #include "memory.h"
 
@@ -194,9 +194,10 @@ static void window_handle_event(uint8_t ev, void* data)
     else if (ev == EVENT_BT_STATUS || ev == EVENT_ANT_STATUS || ev == EVENT_AV)
     {
       system_ready();
-      status_process(ev, (uint16_t)data, NULL);
-      ui_window(ev, (uint16_t)data, NULL);
+      status_process(ev, (intptr_t)data, NULL);
+      ui_window(ev, (intptr_t)data, NULL);
     }
+    /*
     else if (ev == EVENT_FIRMWARE_UPGRADE)
     {
       if (window_current() != &upgrade_process)
@@ -206,7 +207,10 @@ static void window_handle_event(uint8_t ev, void* data)
 
       ui_window(ev, 0, (void*)data);
     }
+    */
+
 #if PRODUCT_W001
+/*
     else if (ev == EVENT_BT_CIEV)
     {
       uint16_t d = (uint16_t)data;
@@ -244,36 +248,37 @@ static void window_handle_event(uint8_t ev, void* data)
     {
       ui_window(ev, 0, data);
     }
+*/
 #endif
     else if (ev == EVENT_NOTIFY_RESULT || ev == EVENT_GESTURE_MATCHED)
     {
-      ui_window(ev, (uint16_t)data, NULL);
+      ui_window(ev, (intptr_t)data, NULL);
     }
     else if (ev == EVENT_KEY_PRESSED || ev == EVENT_KEY_LONGPRESSED)
     {
       backlight_on(window_readconfig()->light_level, CLOCK_SECOND * 3);
 
-      if (ev == EVENT_KEY_PRESSED && (uint16_t)data == KEY_EXIT)
+      if (ev == EVENT_KEY_PRESSED && (intptr_t)data == KEY_EXIT)
       {
         uint8_t ret = ui_window(EVENT_EXIT_PRESSED, 0, NULL);
         if (!ret)
             window_close();
       }
 #if PRODUCT_W001
-      else if (ev == EVENT_KEY_LONGPRESSED && (uint16_t)data == KEY_ENTER)
+      else if (ev == EVENT_KEY_LONGPRESSED && (intptr_t)data == KEY_ENTER)
       {
         // switch to phone call interface to show Siri
-        window_open(&siri_process, (void*)1);
+////        window_open(&siri_process, (void*)1);
       }
 #endif
-      else if (EVENT_KEY_LONGPRESSED && (uint16_t)data == KEY_EXIT)
+      else if (EVENT_KEY_LONGPRESSED && (intptr_t)data == KEY_EXIT)
       {
         window_close();
       }
       else
       {
         // event converter to pass data as lparam
-        ui_window(ev, (uint16_t)data, NULL);
+        ui_window(ev, (intptr_t)data, NULL);
       }
     }
     else if (ev == EVENT_FILESYS_LIST_FILE)
@@ -572,7 +577,7 @@ static uint8_t messagebox_process(uint8_t ev, uint16_t lparam, void* rparam)
     }
     case EVENT_WINDOW_CLOSING:
       motor_on(0, 0);
-      process_post(ui_process, EVENT_NOTIFY_RESULT, (void*)messagebox_result);
+      process_post(ui_process, EVENT_NOTIFY_RESULT, (void*)(intptr_t)messagebox_result);
       break;
 
     default:

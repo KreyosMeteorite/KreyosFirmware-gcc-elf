@@ -6,9 +6,10 @@
 #include <stdio.h>
 #include "system.h"
 #include "window.h"
-#include "bluetooth.h"
-#include "pedometer/pedometer.h"
+//#include "bluetooth.h"
+//#include "pedometer/pedometer.h"
 #include "button.h"
+#include "tornout.h"
 
 struct system_data
 {

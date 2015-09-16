@@ -60,7 +60,7 @@
 
 #if defined(__GNUC__)  &&  defined(__MSP430__)
     /* This is the MSPGCC compiler */
-#define ISR(a,b) static void __attribute__((__interrupt__(a ## _VECTOR))) b(void)
+#define ISR(a,b) void __attribute__((__interrupt__(a ## _VECTOR))) b(void)
 #elif defined(__AQCOMPILER__)
     /* This is the Quadravox compiler */
 #define ISR(a,b) void _INTERRUPT[a ## _VECTOR] b(void)

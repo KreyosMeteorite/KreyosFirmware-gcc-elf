@@ -3,7 +3,7 @@
 #include "isr_compat.h"
 
 extern int dma_channel_0();
-extern int dma_channel_1();
+// extern int dma_channel_1();
 #define NMI_VECTOR 2
 
 ISR(NMI, _NMIISR)
@@ -26,8 +26,8 @@ ISR(DMA, _DMA0ISR)
     }
   case 4:                                 // DMA1IFG = DMA Channel 1
     {
-      if (dma_channel_1())
-        LPM4_EXIT;
+////      if (dma_channel_1())
+////        LPM4_EXIT;
       break;
     }
   case 6: break;                          // DMA2IFG = DMA Channel 2
@@ -42,9 +42,9 @@ ISR(DMA, _DMA0ISR)
   ENERGEST_OFF(ENERGEST_TYPE_IRQ);
 }
 
-extern int port1_pin3();
-extern int port1_pin5();
-extern int port1_pin6();
+////extern int port1_pin3();
+////extern int port1_pin5();
+////extern int port1_pin6();
 
 ISR(PORT1, _PORT1ISR) {
   ENERGEST_ON(ENERGEST_TYPE_IRQ);
@@ -57,22 +57,22 @@ ISR(PORT1, _PORT1ISR) {
   case 6: break;                          // Pin2
   case 8:                                 // Pin3
     {
-      if (port1_pin3())
-        LPM4_EXIT;
+////      if (port1_pin3())
+////        LPM4_EXIT;
       break;
     }
   case 10: break;                          // Pin4
 #if PRODUCT_W001
   case 12:                                 // Pin5
       {
-      if (port1_pin5())
-        LPM4_EXIT;
+////      if (port1_pin5())
+////        LPM4_EXIT;
       break;
     }
   case 14:                                 // Pin6
     {
-      if (port1_pin6())
-        LPM4_EXIT;
+////      if (port1_pin6())
+////        LPM4_EXIT;
       break;
     }
 #endif

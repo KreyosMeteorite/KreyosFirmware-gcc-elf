@@ -75,15 +75,15 @@ const char* toEnglishPeriod(uint32_t seconds, char* buffer)
     return buffer;
   }
 
-  if (seconds < 3600 * 24)
+  if (seconds < (uint32_t)3600 * 24)
   {
     sprintf(buffer, "%dh ago", seconds/3600);
     return buffer;
   }
 
-  if (seconds < 3600 * 24 * 5) // 5days max
+  if (seconds < (uint32_t)3600 * 24 * 5) // 5days max
   {
-    sprintf(buffer, "%dd ago", seconds/(3600*24));
+    sprintf(buffer, "%dd ago", seconds/((uint32_t)3600*24));
     return buffer;    
   }
 

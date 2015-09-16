@@ -48,16 +48,17 @@
 #include "battery.h"
 #include "button.h"
 #include "spiflash.h"
-#include "bluetooth.h"
+//#include "bluetooth.h"
 #include "backlight.h"
 #include "window.h"
 #include "system.h"
-#include "codec.h"
+//#include "codec.h"
 
-#include "ant/ant.h"
-#include "ant/antinterface.h"
+//#include "ant/ant.h"
+//#include "ant/antinterface.h"
 
 #include "system.h"
+#include "tornout.h"
 /*--------------------------------------------------------------------------*/
 #define DEBUG 1
 #if DEBUG
@@ -92,7 +93,7 @@ main(int argc, char **argv)
   msp430_cpu_init();
   clock_init();
 
-  uart_init(9600); /* Must come before first printf */
+  uart_init(6); /* Must come before first printf */
 
   /* xmem_init(); */
 

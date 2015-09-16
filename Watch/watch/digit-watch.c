@@ -327,7 +327,7 @@ uint8_t digitclock_process(uint8_t ev, uint16_t lparam, void* rparam)
     if (rparam == NULL)
       _selection = window_readconfig()->digit_clock;
     else
-      _selection = (uint8_t)rparam - 1;
+      _selection = (intptr_t)rparam - 1;
     rtc_enablechange(MINUTE_CHANGE);
 
     return 0x80;

@@ -8,11 +8,11 @@
 #include "sys/ctimer.h"
 #include "grlib/grlib.h"
 #include "window.h"
-#include "bluetooth.h"
+//#include "bluetooth.h"
 #include "battery.h"
 #include "rtc.h"
-#include "pedometer/pedometer.h"
-#include "sportsdata.h"
+//#include "pedometer/pedometer.h"
+//#include "sportsdata.h"
 #include "memory.h"
 #include "memlcd.h"
 #include "icons.h"
@@ -147,6 +147,7 @@ static void OnDraw(tContext* pContext)
     GrStringDraw(pContext, &icon, 1, x, 0, 0);
   }
 
+/*
   if (status & MID_STATUS)
   {
     char icon = ICON_RUN;
@@ -181,6 +182,7 @@ static void OnDraw(tContext* pContext)
     GrContextFontSet(pContext, &g_sFontGothic14);
     GrStringDrawCentered(pContext, buf, -1, LCD_WIDTH/2, 8, 0);
   }
+*/
 }
 
 /*
@@ -253,14 +255,15 @@ static void on_midnigth(uint8_t event, uint16_t lparam, void* rparam)
   uint16_t year;
   uint8_t month, day, weekday;
   rtc_readdate(&year, &month, &day, &weekday);
-  create_data_file(year - 2000, month, day);
+////  create_data_file(year - 2000, month, day);
 
-  cleanUpSportsWatchData();
+//  cleanUpSportsWatchData();
 
 }
 
 static void record_activity_data(uint8_t hour, uint8_t minute)
 {
+/*
   uint32_t data[3] = {0};
   data[0] = ped_get_steps()    - s_daily_data[0];
   data[1] = ped_get_calorie()  - s_daily_data[1];
@@ -275,6 +278,7 @@ static void record_activity_data(uint8_t hour, uint8_t minute)
     s_daily_data[1] += data[1];
     s_daily_data[2] += data[2];
   }
+*/
 }
 
 uint8_t status_process(uint8_t event, uint16_t lparam, void* rparam)
@@ -300,12 +304,14 @@ uint8_t status_process(uint8_t event, uint16_t lparam, void* rparam)
         on_midnigth(event, lparam, rparam);
       }
 
+/*
       if (s_cur_min != minute &&
         (get_mode() == DATA_MODE_NORMAL || (get_mode() & DATA_MODE_PAUSED) != 0))
       {
         s_cur_min = minute;
         record_activity_data(hour, minute);
       }
+*/
 
 #if 0
       //sports watch pause/resume
@@ -349,6 +355,7 @@ uint8_t status_process(uint8_t event, uint16_t lparam, void* rparam)
       status ^= MID_STATUS;
       break;
     }
+/*
   case EVENT_BT_STATUS:
     if (lparam == BT_CONNECTED)
       status |= BLUETOOTH_STATUS;
@@ -357,6 +364,7 @@ uint8_t status_process(uint8_t event, uint16_t lparam, void* rparam)
     break;
   case EVENT_ANT_STATUS:
     break;
+*/
   default:
     return 0;
   }

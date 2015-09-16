@@ -3,7 +3,7 @@
 #include "grlib/grlib.h"
 #include "memlcd.h"
 #include "rtc.h"
-#include "bluetooth.h"
+//#include "bluetooth.h"
 #include <stdio.h>
 #include <string.h>
 #include "memory.h"
@@ -22,7 +22,7 @@
 #define DATA_BT   0xF4
 #define DATA_VERSION 0xF5
 #define DATA_BTADDR 0xF6
-#define DATA_LEGAL 0xF7
+#define DATA_GITHUB 0xF7
 #define DATA_LIGHT 0xF8
 #define DATA_VOL  0xF9
 #define DATA_FONTCONFIG 0xFA
@@ -44,7 +44,7 @@ static const struct MenuItem SetupMenu[] =
   {DATA_TIME, "Time", &configtime_process},
   {DATA_LIGHT, "Back Light", &configlight_process},
   {DATA_VOL, "Volume", &configvol_process},
-  {DATA_BT, "Bluetooth", &btconfig_process},
+//  {DATA_BT, "Bluetooth", &btconfig_process},
   {DATA_FONTCONFIG, "Font", &configfont_process},
   {DATA_ALARM, "Alarm", &configalarm_process},  
   {-1,   "Factory Reset", &reset_process},
@@ -58,17 +58,17 @@ static const struct MenuItem AboutMenu[] =
   {DATA_VERSION, "Version", NULL},
   {NO_DATA, "Serial", NULL},
   {DATA_BTADDR, "", NULL},
-  {NO_DATA, "Legal", NULL},
-  {DATA_LEGAL, "", NULL},
+  {NO_DATA, "GitHub", NULL},
+  {DATA_GITHUB, "", NULL},
   {-1, NULL, NULL}
 };
 
 
 static const struct MenuItem MainMenu[] =
 {
-  {'a', "Activity", &today_process},
-  {'b', "Sports", &sporttype_process},
-  {'c', "Music", &control_process},
+//  {'a', "Activity", &today_process},
+//  {'b', "Sports", &sporttype_process},
+//  {'c', "Music", &control_process},
   {'d', "Clock", &worldclock_process},
   {'e', "Calendar", &calendar_process},
   {'f', "Stopwatch", &stopwatch_process},
@@ -82,24 +82,24 @@ static const struct MenuItem MainMenu[] =
 static const struct MenuItem TestMenu[] = 
 {
   {DATA_BTADDR, "", NULL},
-  {0, "Button", &test_button},
-  {0, "Motor", &test_motor},
-  {0, "Light", &test_light},
-  {0, "LCD", &test_lcd},
-#ifdef PRODUCT_W001
-  {0, "ANT+", &test_ant},
-  {0, "Codec", &test_codec},
-  {0, "MPU6050", &test_mpu6050},
-#endif
-  {0, "Bluetooth", &test_bluetooth},
-  {0, "GoogleNow", &test_googlenow},
-  {0, "Sleep", &test_sleep},
-  {0, "BT DUT", &test_dut},
-  {0, "Self-test", &selftest_process},
-  {0, "ClearSportsData", &test_cleardata},
-  {0, "BuildSportsData", &test_builddata},
-  {0, "SportsData", &test_sportsdata},
-  {0, "Reboot", &test_reboot},
+  //  {0, "Button", &test_button},
+  //  {0, "Motor", &test_motor},
+  //  {0, "Light", &test_light},
+  //  {0, "LCD", &test_lcd},
+  //#ifdef PRODUCT_W001
+  //  {0, "ANT+", &test_ant},
+  //  {0, "Codec", &test_codec},
+  //  {0, "MPU6050", &test_mpu6050},
+  //#endif
+  //  {0, "Bluetooth", &test_bluetooth},
+  //  {0, "GoogleNow", &test_googlenow},
+  //  {0, "Sleep", &test_sleep},
+  //  {0, "BT DUT", &test_dut},
+  //  {0, "Self-test", &selftest_process},
+  //  {0, "ClearSportsData", &test_cleardata},
+  //  {0, "BuildSportsData", &test_builddata},
+  //  {0, "SportsData", &test_sportsdata},
+  //  {0, "Reboot", &test_reboot},
   {0, NULL, NULL}
 };
 
@@ -194,13 +194,14 @@ static void drawMenuItem(tContext *pContext, const tFont* textFont, int MENU_SPA
         break;
       }
       case DATA_BT:
-      sprintf(buf, "%s", bluetooth_running()?"ON":"OFF");
+      ////sprintf(buf, "%s", bluetooth_running()?"ON":"OFF");
+      sprintf(buf, "%s", "NUKED");////
       break;
       case DATA_ANT:
       sprintf(buf, "%s", "OFF");
       break;
-      case DATA_LEGAL:
-      strcpy(buf, "kreyos.com/legal");
+      case DATA_GITHUB:
+      strcpy(buf, "KreyosMeteorite");
       break;
       case DATA_VERSION:
       strcpy(buf, FWVERSION);
@@ -456,7 +457,7 @@ uint8_t menu_process(uint8_t ev, uint16_t lparam, void* rparam)
         {
           if (Items[current].handler == &menu_process)
           {
-            if (current == 9)
+            if (current == 6) // Change this if the menu changes
             {
               Items = SetupMenu;
             }

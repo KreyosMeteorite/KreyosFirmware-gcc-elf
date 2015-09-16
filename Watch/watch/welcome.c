@@ -1,7 +1,7 @@
 #include "contiki.h"
 #include "grlib/grlib.h"
 #include "window.h"
-#include "bluetooth.h"
+//#include "bluetooth.h"
 #include "memlcd.h"
 #include "icons.h"
 #include <stdio.h>
@@ -60,6 +60,7 @@ static void OnDraw(tContext *pContext)
   GrContextForegroundSet(pContext, ClrBlack);
   GrContextFontSet(pContext, (tFont*)&g_sFontGothic18b);
 
+/*
   if (bluetooth_running())
   {
     char buf[20];
@@ -70,6 +71,7 @@ static void OnDraw(tContext *pContext)
       sprintf(buf, "Meteor %02X%02X [%d]", btaddr[4], btaddr[5], state);
     GrStringDrawCentered(pContext, buf, -1, LCD_WIDTH/2, 153, 0);
   }
+*/
 }
 
 uint8_t welcome_process(uint8_t ev, uint16_t lparam, void* rparam)
@@ -79,11 +81,13 @@ uint8_t welcome_process(uint8_t ev, uint16_t lparam, void* rparam)
 	{
 		case EVENT_WINDOW_CREATED:
 		      // check the btstack status
+/*
 		    if (bluetooth_running())
 		    {
 		      // if btstack is on, make it discoverable
 		      bluetooth_discoverable(1);
 		    }
+*/
       state = 0;
 			return 0x80;
 
@@ -91,6 +95,7 @@ uint8_t welcome_process(uint8_t ev, uint16_t lparam, void* rparam)
 			OnDraw((tContext*)rparam);
 			break;
 
+/*
 		case EVENT_BT_STATUS:
     	{
     		if (lparam == BT_INITIALIZED)
@@ -100,6 +105,7 @@ uint8_t welcome_process(uint8_t ev, uint16_t lparam, void* rparam)
         window_invalid(NULL);
 		    break;
 		  }
+*/
 
     case EVENT_EXIT_PRESSED:
     break;

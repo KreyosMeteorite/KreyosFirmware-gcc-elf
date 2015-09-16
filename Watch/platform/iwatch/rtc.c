@@ -4,7 +4,8 @@
 #include "rtc.h"
 #include "system.h"
 #include "window.h"
-#include "btstack/include/btstack/utils.h"
+//#include "btstack/include/btstack/utils.h"
+#include "tornout.h"
 
 PROCESS(rtc_process, "RTC Driver");
 PROCESS_NAME(system_process);

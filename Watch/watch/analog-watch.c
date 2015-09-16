@@ -392,7 +392,7 @@ uint8_t analogclock_process(uint8_t ev, uint16_t lparam, void* rparam)
     if (rparam == NULL)
       selection = window_readconfig()->analog_clock;
     else
-      selection = (uint8_t)rparam - 0x1;
+      selection = (intptr_t)rparam - 0x1;
     if (selection > sizeof(FaceSelections)/sizeof(struct clock_draw) - 1)
       selection = sizeof(FaceSelections)/sizeof(struct clock_draw) - 1;
 
